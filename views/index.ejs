@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include("../partials/head.ejs")%>
+   <%- include("../partials/head.ejs")%>
    <body>
-      <%- include("../partials/nav.ejs") %> 
+      <%- include("../partials/nav.ejs") %>
       <div class="container">
          <ul class="collection with-header">
             <% if(items.length > 0 ){ items.forEach(element => { %>
             <li class="collection-item">
                <div>
-                  <%= element.name %> <%= element.price %>
-
+                  <a href="/items/<%= element.id %>">
+                     <%= element.name %> <%= element.price %>
+                  </a>
+                     
                   <a href="#!" class="secondary-content">
                      <i class="material-icons">edit</i>
                      <i class="material-icons">delete</i>
@@ -19,5 +21,7 @@
             <% }); }else{ } %>
          </ul>
       </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
    </body>
 </html>

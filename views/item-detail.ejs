@@ -3,10 +3,13 @@
    <%- include("../partials/head.ejs")%>
    <body>
       <%- include("../partials/nav.ejs") %>
-      <div class="container center-align">
-         <i class="large material-icons prefix">sentiment_very_dissatisfied</i>
-         <h1>Whoops</h1>
-         <h3>404 - The page does not exists</h3>
+      <div class="container">
+         <h4>Item Detail</h4>
+         <div>
+            <h5>Item Name: <%= item.name %></h5>
+            <h5>Item Price: <%= item.price %></h5>
+         </div>
+         <a href="" class="delete btn">Delete</a>
       </div>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
