@@ -45,7 +45,7 @@ app.delete("/items/:id", (req, res) => {
    const id = req.params.id;
    console.log("inside del");
    Item.findByIdAndDelete(id).then((result) => {
-      res.redirect("/get-items");
+      res.json({ redirect: "/get-items" });
    });
 });
 
