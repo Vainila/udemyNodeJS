@@ -9,9 +9,29 @@
             <h5>Item Name: <%= item.name %></h5>
             <h5>Item Price: <%= item.price %></h5>
          </div>
-         <a href="" class="delete btn">Delete</a>
+         <a href="" class="delete btn" id="deleteBtn" data-id="<%= item.id %>"
+            >Delete</a
+         >
       </div>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script>
+         deleteBtn.onclick = function (e) {
+            e.preventDefault();
+            const id = deleteBtn.dataset.id;
+            console.log(id);
+            const endpoint = `/items/${id}`;
+            console.log(endpoint);
+            fetch(endpoint, {
+               method: "DELETE",
+            })
+               .then(() => {})
+               .catch((err) => {
+                  console.log(err);
+               });
+
+            console.log("after del");
+         };
+      </script>
    </body>
 </html>
