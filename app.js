@@ -49,6 +49,14 @@ app.delete("/items/:id", (req, res) => {
    });
 });
 
+app.put("/items/:id", (req, res) => {
+   const id = req.params.id;
+   console.log("inside del");
+   Item.findByIdAndUpdate(id, req.body).then((result) => {
+      res.json({ msg: "Updated Successfully" });
+   });
+});
+
 app.get("/get-items", (req, res) => {
    Item.find()
       .then((result) => {
