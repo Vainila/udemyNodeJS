@@ -16,36 +16,18 @@ mongoose
 
 app.set("view engine", "ejs");
 
-app.get("/create-item", (req, res) => {
-   const item = new Item({
-      name: "book",
-      price: "30",
-   });
-   item
-      .save()
-      .then((result) => res.send(result))
-      .catch((err) => console.log(err));
+app.get("/", (req, res) => {
+   res.redirect("/get-items");
 });
 
 app.get("/get-items", (req, res) => {
    Item.find()
-      .then((result) => res.send(result))
-      .catch((err) => console.log(err));
-});
-app.get("/get-itemById", (req, res) => {
-   Item.findById("6213a5553d92678779861497")
-      .then((result) => res.send(result))
+      .then((result) => {
+         res.render("index", { items: result });
+      })
       .catch((err) => console.log(err));
 });
 
-app.get("/", (req, res) => {
-   const items = [
-      { name: "mobile phone", price: "300" },
-      { name: "book", price: "30" },
-      { name: "computer", price: "1500" },
-   ];
-   res.render("index", { items });
-});
 app.get("/add-item", (req, res) => {
    res.render("add-item");
 });
