@@ -1,8 +1,18 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-app.set("view engine", "ejs");
-app.listen(3000);
 
+const mongodb =
+   "mongodb+srv://v:vainila@cluster0.h2anz.mongodb.net/item-database?retryWrites=true&w=majority";
+mongoose
+   .connect(mongodb, { useNewUrlParser: true })
+   .then(() => {
+      console.log("connected");
+      app.listen(3000);
+   })
+   .catch((err) => console.log(err));
+
+app.set("view engine", "ejs");
 app.get("/", (req, res) => {
    const items = [
       { name: "mobile phone", price: "300" },
