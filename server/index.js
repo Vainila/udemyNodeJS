@@ -11,12 +11,12 @@ app.use(cors());
 
 const mongoDB =
    "mongodb+srv://v:vainila@cluster0.h2anz.mongodb.net/mernDB?retryWrites=true&w=majority";
+const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-   res.send("Hello World");
+   app.listen(PORT);
 });
 
-const PORT = process.env.PORT || 5000;
 mongoose
    .connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
    .then(() => {
