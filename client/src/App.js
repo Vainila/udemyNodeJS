@@ -16,9 +16,11 @@ function App() {
       const fetchData = async () => {
          const result = await readTodos();
          setTodos(result);
+         console.log(todos, "fetch todos");
       };
+
       fetchData();
-   }, []);
+   }, [currentId]);
 
    useEffect(() => {
       let currentTodo =
