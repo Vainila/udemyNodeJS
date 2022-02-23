@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import io from "socket.io-client";
+import Messages from "./messages/Messages";
+import Input from "./input/Input";
+
+import "./Chat.css";
 
 let socket;
 
@@ -31,26 +35,15 @@ const Chat = () => {
    };
 
    return (
-      <div>
-         {room_id}
-         {room_name}
-
-         <pre>{JSON.stringify(messages, null, 2)}</pre>
-
-         <div>Chat {JSON.stringify(user)}</div>
-         <form onSubmit={sendMessage}>
-            <input
-               type="text"
-               value={message}
-               onChange={(e) => setMessage(e.target.value)}
-               onKeyPress={(event) =>
-                  event.key === "Enter" ? sendMessage(event) : null
-               }
+      <div className="outerContainer">
+         <div className="container">
+            <Messages messages={messages} user_id={user.id} />
+            <Input
+               message={message}
+               setMessage={setMessage}
+               sendMessage={sendMessage}
             />
-            <button type="submit" className="btn">
-               Send message
-            </button>
-         </form>
+         </div>
       </div>
    );
 };

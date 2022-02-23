@@ -6,6 +6,7 @@ const socketio = require("socket.io");
 
 const io = socketio(http);
 const { addUser, getUser, removeUser } = require("./helper");
+const Message = require("./models/Message");
 const PORT = process.env.PORT || 5000;
 
 const mongodb =
@@ -20,6 +21,10 @@ mongoose
    });
 
 io.on("connection", (socket) => {
+   Room.find().then((result) => {
+      socket.emit("output-rooms", result);
+      console.log("output-rooms", result);
+   });
    socket.on("create-room", (name) => {
       const room = new Room({ name });
       room.save().then((result) => {
@@ -49,6 +54,11 @@ io.on("connection", (socket) => {
          text: message,
       };
       console.log("message, ", msgToStore);
+      const msg = new Message(msgToStore);
+      msg.save().then((result) => {
+         io.to(room_id).emit("message", result);
+         callback();
+      });
       io.to(room_id).emit("message", msgToStore);
       callback();
    });
