@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
    return (
@@ -6,9 +7,9 @@ const Navbar = () => {
          <div>
             <nav>
                <div className="nav-wrapper">
-                  <a href="#!" className="brand-logo">
+                  <Link to="/" className="brand-logo">
                      Logo
-                  </a>
+                  </Link>
                   <a
                      href="#"
                      data-target="mobile-demo"
@@ -18,10 +19,10 @@ const Navbar = () => {
                   </a>
                   <ul className="right hide-on-med-and-down">
                      <li>
-                        <a href="sass.html">Login</a>
+                        <Link to="/login">Login</Link>
                      </li>
                      <li>
-                        <a href="badges.html">Signup</a>
+                        <Link to="/signup">Signup</Link>
                      </li>
                      <li>
                         <a href="collapsible.html">Logout</a>

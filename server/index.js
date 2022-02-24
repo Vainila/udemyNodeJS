@@ -2,8 +2,19 @@ const Room = require("./models/Room");
 const express = require("express");
 const app = express();
 const authRoutes = require("./routes/authRoutes");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+
+const corsOptions = {
+   origin: "http://localhost:3000",
+   credentials: true,
+   optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(authRoutes);
+app.use(cookieParser());
 const http = require("http").createServer(app);
 const mongoose = require("mongoose");
 const socketio = require("socket.io");
@@ -23,6 +34,18 @@ mongoose
    .catch((error) => {
       console.log(error);
    });
+
+app.get("/set-cookies", (req, res) => {
+   res.cookie("username", "Tony");
+   res.cookie("isAuthenticated", true, { maxAge: 24 * 60 * 60 * 1000 });
+   res.send("cookies are set ");
+});
+
+app.get("/get-cookies", (req, res) => {
+   const cookies = req.cookies;
+   console.log(cookies);
+   res.json(cookies);
+});
 
 io.on("connection", (socket) => {
    Room.find().then((result) => {

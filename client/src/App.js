@@ -5,6 +5,8 @@ import { UserContext } from "./UserContext";
 import Chat from "./components/chat/Chat";
 import Home from "./components/home/Home";
 import Navbar from "./components/layout/navbar";
+import Signup from "./components/auth/Signup";
+import Login from "./components/auth/Login";
 
 import "./App.css";
 
@@ -16,6 +18,8 @@ function App() {
             <Navbar />
             <Routes>
                <Route path="/" element={<Home />} />
+               <Route path="/signup" element={<Signup />} />
+               <Route path="/login" element={<Login />} />
                <Route path="/chat/:room_id/:room_name" element={<Chat />} />
             </Routes>
          </UserContext.Provider>
