@@ -1,5 +1,11 @@
-modules.exports.signup = (req, res) => {};
+module.exports.signup = (req, res) => {
+   res.send("signup");
+};
 
-modules.exports.signup = (req, res) => {};
+module.exports.login = (req, res) => {
+   res.send("login");
+};
 
-modules.exports.signup = (req, res) => {};
+module.exports.logout = (req, res) => {
+   res.send("logout");
+};

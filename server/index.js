@@ -1,5 +1,9 @@
 const Room = require("./models/Room");
+const express = require("express");
 const app = require("express")();
+
+const authRoutes = require("./routes/authRoutes");
+app.use(express.json());
 const http = require("http").createServer(app);
 const mongoose = require("mongoose");
 const socketio = require("socket.io");
