@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 const Navbar = () => {
+   const { user } = useContext(UserContext);
    return (
       <div>
          <div>
@@ -21,12 +23,15 @@ const Navbar = () => {
                      <li>
                         <Link to="/login">Login</Link>
                      </li>
-                     <li>
-                        <Link to="/signup">Signup</Link>
-                     </li>
-                     <li>
-                        <a href="collapsible.html">Logout</a>
-                     </li>
+                     {!user ? (
+                        <li>
+                           <Link to="/signup">Signup</Link>
+                        </li>
+                     ) : (
+                        <li>
+                           <a href="collapsible.html">Logout</a>
+                        </li>
+                     )}
                   </ul>
                </div>
             </nav>
@@ -34,9 +39,15 @@ const Navbar = () => {
                <li>
                   <a href="sass.html">Login</a>
                </li>
-               <li>
-                  <a href="badges.html">Signup</a>
-               </li>
+               {!user ? (
+                  <li>
+                     <Link to="/signup">Signup</Link>
+                  </li>
+               ) : (
+                  <li>
+                     <a href="collapsible.html">Logout</a>
+                  </li>
+               )}
                <li>
                   <a href="collapsible.html">Logout</a>
                </li>
