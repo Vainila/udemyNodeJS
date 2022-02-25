@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { UserContext } from "./UserContext";
 import Chat from "./components/chat/Chat";
@@ -11,6 +11,21 @@ import Login from "./components/auth/Login";
 import "./App.css";
 
 function App() {
+   useEffect(() => {
+      const verifyUser = async () => {
+         try {
+            const res = await fetch("http://localhost:5000/verifyUser", {
+               credentials: "include",
+               headers: { "Content-Type": "application/json" },
+            });
+            const data = await res.json();
+         } catch (error) {
+            console.log(error);
+         }
+      };
+      verifyUser();
+   });
+
    const [user, setUser] = useState(null);
    return (
       <BrowserRouter>

@@ -3,7 +3,18 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 
 const Navbar = () => {
-   const { user } = useContext(UserContext);
+   const { user, setUser } = useContext(UserContext);
+   const logout = () => {
+      try {
+         fetch("https://localhost:5000/logout", {
+            credentials: "include",
+         });
+         setUser(null);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    return (
       <div>
          <div>
@@ -29,7 +40,9 @@ const Navbar = () => {
                         </li>
                      ) : (
                         <li>
-                           <a href="collapsible.html">Logout</a>
+                           <button className="btn" onClick={logout}>
+                              Logout
+                           </button>
                         </li>
                      )}
                   </ul>
@@ -45,7 +58,9 @@ const Navbar = () => {
                   </li>
                ) : (
                   <li>
-                     <a href="collapsible.html">Logout</a>
+                     <button className="btn" onClick={logout}>
+                        Logout
+                     </button>
                   </li>
                )}
                <li>

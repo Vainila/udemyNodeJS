@@ -61,3 +61,21 @@ module.exports.login = async (req, res) => {
 module.exports.logout = (req, res) => {
    res.send("logout");
 };
+
+module.exports.verifyUser = (req, res, next) => {
+   const token = req.cookies.jwt;
+   if (token) {
+      jwt.verify(token, "chatroom secret", async (error, decodedToken) => {
+         if (err) {
+            console.log(err.message);
+         } else {
+            let user = await User.find;
+         }
+      });
+   }
+};
+
+module.exports.logout = (req, res) => {
+   res.cookie("jwt", "", { maxAge: 1 });
+   res.status(200).json({ logout: true });
+};

@@ -23,12 +23,11 @@ const Login = () => {
          const res = await fetch("http://localhost:5000/login", {
             method: "POST",
             credentials: "include",
-            body: JSON.stringify({ name, email, password }),
+            body: JSON.stringify({ email, password }),
             headers: { "Content-Type": "application/json" },
          });
          const data = await res.json();
          if (data.errors) {
-            setEmailError(data.errors.email);
             setNameError(data.errors.name);
             setPasswordError(data.errors.password);
          }
@@ -49,21 +48,6 @@ const Login = () => {
       <div className="row">
          <div className="container" style={{ marginTop: "50px" }}>
             <form className="col s12" onSubmit={submitHandler}>
-               <div className="row">
-                  <div className="input-field col s12">
-                     <input
-                        id="name"
-                        type="text"
-                        className="validate"
-                        value={name}
-                        onChange={(e) => {
-                           setName(e.target.value);
-                        }}
-                     />
-                     <div className="name error red-text">{nameError}</div>
-                     <label htmlFor="first_name">First Name</label>
-                  </div>
-               </div>
                <div className="row">
                   <div className="input-field col s12">
                      <input
